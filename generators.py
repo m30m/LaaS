@@ -203,7 +203,7 @@ def get_mobile():
     for i in range(10):
         prefixes.append('091' + str(i))
         prefixes.append('093' + str(i))
-    return random.choice(prefixes) + ''.join(random.choices(NUMS, k=7))
+    return random.choice(prefixes) + ''.join([random.choice(NUMS) for i in range(7)])
 
 
 def get_password(username):
@@ -218,7 +218,7 @@ def get_password(username):
                 y_username = y_username.upper()
             return y_username
         else:
-            return ''.join(random.choices(NUMS, k=8))
+            return ''.join([random.choice(NUMS) for i in range(random.randint(8, 10))])
 
 
 def digikala():
