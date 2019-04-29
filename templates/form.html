@@ -3,13 +3,13 @@
     <div class="ui stackable grid basic segment" dir="rtl">
         <div class="row">
             <div class="four wide column centered">
-                <form method="get" action="/download">
+                <form method="get" action="/download" onsubmit="return check_1000()">
                     <div class="ui form">
                         <div class="grouped fields">
                             <label>از چه دیتابیسی نشت اطلاعات می‌خواهید؟</label>
                             <div class="field">
                                 <div class="ui radio checkbox">
-                                    <input type="radio" name="db" value="digikala">
+                                    <input type="radio" name="db" value="digikala" checked="checked">
                                     <label><img style="height: 40px" src="/static/logos/digikala.png"/></label>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                         <div class="inline fields">
                             <label>تعداد افراد</label>
                             <div class="field">
-                                <input name="count" type="number" min="0" value="10">
+                                <input id="person_count" name="count" type="number" min="0" value="10">
                             </div>
                         </div>
                         <div class="grouped fields">
@@ -56,10 +56,38 @@
                         <button class="ui primary button submit">
                             نشت بده!
                         </button>
+                        <div class="ui button" tabindex="0" onclick="show_aboutus()">
+                            <div class="visible content">
+                                درباره‌ی ما
+                            </div>
+                        </div>
 
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <div class="ui modal">
+        <div class="header">درباره‌ی این وبسایت</div>
+        <div class="content">
+            <p>نشت اطلاعات یا data leakage بحران جدی و بسیارخطرناکی برای شرکت‌های بزرگ به شمار می‌آید. برای همین منتشر
+                شدن خبری مبنی بر این اتفاق ممکن است برای هر شرکتی بسیار گران تمام شود. هدف از ساخت این وبسایت این است که
+                نشان دهیم چقدر راحت می‌توان یک دیتای ساختگی از هر شرکت را تولید کرد و به اسم «نشت اطلاعات» آن را منتشر
+                نمود. خوب است قبل از باور کردن این اخبار از صحت آن مطمئن شویم. </p>
+            <p>این وبسایت وابسته به شرکت خاصی نیست.</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function check_1000() {
+            if ($('#person_count').val() > 1000) {
+                alert('نشت دیتای بیش از ۱۰۰۰ نفر تنها در نسخه premimum عرضه می‌گردد');
+                return false;
+            }
+            return true;
+        }
+
+        function show_aboutus() {
+            $('.ui.modal').modal('show');
+        }
+    </script>
 {% endblock %}

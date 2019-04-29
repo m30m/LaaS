@@ -19,7 +19,7 @@ def main():
 @app.route('/download', methods=['GET'])
 def download():
     db = request.args.get('db')
-    count = int(request.args.get('count'))
+    count = min(int(request.args.get('count')), 1000)
     format = request.args.get('format')
 
     db_dict = {'digikala': digikala,
