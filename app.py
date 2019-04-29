@@ -1,6 +1,12 @@
-from flask import Flask, send_from_directory
+import json
+import tempfile
+
+from flask import Flask, send_from_directory, send_file
 from flask import render_template
 from flask import request
+from generators import digikala, snapp, tap30, cafe
+
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -12,7 +18,27 @@ def main():
 
 @app.route('/download', methods=['GET'])
 def download():
-    pass
+    db = request.args.get('db')
+    count = int(request.args.get('count'))
+    format = request.args.get('format')
+
+    db_dict = {'digikala': digikala,
+               'snapp': snapp,
+               'tap30': tap30,
+               'cafe': cafe}
+    results = []
+    for i in range(count):
+        results.append(db_dict[db]())
+
+    handle, filepath = tempfile.mkstemp()
+    if format == 'csv':
+        df = pd.DataFrame.from_dict(results)
+        df.to_csv(filepath, index=False)
+        return send_file(filepath, attachment_filename=db + '_leakage.csv', as_attachment=True)
+    else:
+        with open(filepath, 'w') as fw:
+            fw.write(json.dumps(results, indent=2))
+        return send_file(filepath, attachment_filename=db + '_leakage.json', as_attachment=True)
 
 
 @app.route('/static/<path:path>')
