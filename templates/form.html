@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="ui stackable grid basic segment" dir="rtl">
+        <div class="row">
+            <div class="four wide column centered">
+                <form method="get" action="/download">
+                    <div class="ui form">
+                        <div class="grouped fields">
+                            <label>از چه دیتابیسی نشت اطلاعات می‌خواهید؟</label>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="db" value="digikala">
+                                    <label><img style="height: 40px" src="/static/logos/digikala.png"/></label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="db" value="snapp">
+                                    <label><img style="height: 30px" src="/static/logos/snapp.png"/></label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="db" value="tap30">
+                                    <label><img style="height: 40px" src="/static/logos/tap30.jpg"/></label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="db" value="cafe">
+                                    <label><img style="height: 40px" src="/static/logos/cafe.png"/></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inline fields">
+                            <label>تعداد افراد</label>
+                            <div class="field">
+                                <input name="count" type="number" min="0">
+                            </div>
+                        </div>
+                        <button class="ui primary button submit">
+                            نشت بده!
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
