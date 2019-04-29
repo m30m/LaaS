@@ -242,7 +242,7 @@ def cafe():
         'credit': random.randint(0, 1000) * 1000,
         'installs': random.randint(0, 100),
         'subscriptions': random.randint(0, 10),
-        'city': random.choice(cities.keys()),
+        'city': random.choice(list(cities.keys())),
         'mobile': get_mobile()
     }
 
